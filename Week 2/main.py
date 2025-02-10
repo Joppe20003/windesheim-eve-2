@@ -10,26 +10,34 @@ def laadGerecht(gerecht, ingredientenLijst):
     for ingredient in ingredientenLijst:
         print(ingredient)
 
-def laadStappen(gerecht):
+def laadAantalPersonen(gerecht):
     try:
         aantalPersonen = int(input("Aantal mensen: "))
         gerecht.setAantalPersonen(aantalPersonen)
+
+        laadStappen(gerecht)
     except ValueError:
         print("Foutieve invoer")
-        laadStappen(gerecht)
+        laadAantalPersonen(gerecht)
 
+def laadStappen(gerecht):
     plantAardig = input("Plantaardig gewenst?: (Ja / Nee) ")
     ingredientenLijst = None
 
     if plantAardig == "Ja":
         ingredientenLijst = gerecht.setPlantAardigRecept(True)
         laadGerecht(gerecht, ingredientenLijst)
+        return
+
     if plantAardig == "Nee":
         ingredientenLijst = gerecht.setPlantAardigRecept(False)
         laadGerecht(gerecht, ingredientenLijst)
+        return
     
-    print("Foutieve invoer")
-    laadStappen(gerecht)
+    if plantAardig != "Nee" or plantAardig != "Ja":
+        print("Foutieve invoer")
+        laadStappen(gerecht)
+        return
 
 def laadKeuze(gerechten):
     print("--- Beschikbare recepten ---")
@@ -44,7 +52,7 @@ def laadKeuze(gerechten):
 
         laadKeuze(gerechten)
     else:
-        laadStappen(gerechten[keuzeIndex])
+        laadAantalPersonen(gerechten[keuzeIndex])
 
 def main():
     gerechtenLijst = []
