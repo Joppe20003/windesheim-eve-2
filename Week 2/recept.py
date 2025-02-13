@@ -24,7 +24,7 @@ class Recept:
         for ingredient in self.__ingredientenLijst:
             ingredient.setHoeveelheid(aantal)
 
-    def getAantaalPersonen(self):
+    def getAantalPersonen(self):
         return self.__aantalPersonen
     
     def setPlantAardigRecept(self, plantaardig):
@@ -33,7 +33,10 @@ class Recept:
 
         for ingredient in self.__ingredientenLijst:
             if plantaardig:
-                plantAardigIngredientenLijst.append(ingredient.getIngredient(True))
+                alternatief = ingredient.getIngredient(True)
+                alternatief.setHoeveelheid(self.__aantalPersonen)
+
+                plantAardigIngredientenLijst.append(alternatief)
             else:
                 nietPlantAardigIngredientenLijst.append(ingredient.getIngredient(False))
 
