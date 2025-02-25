@@ -4,4 +4,4 @@ class Stap:
         self.__tip = tip
 
     def __str__(self):
-        return f"{self.__beschrijving}{', ' + "tip: " + self.__tip if self.__tip != None else ""}"
+        return f"{self.__beschrijving}{', ' + "Tip: " + self.__tip if self.__tip != None else ""}"

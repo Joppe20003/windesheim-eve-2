@@ -4,6 +4,7 @@ from recept import Recept
 
 def laadGerecht(gerecht, ingredientenLijst):
     print("\n")
+    print("---Recept---")
     print(gerecht)
     print("Ingredienten:")
     
@@ -58,7 +59,7 @@ def main():
     gerechtenLijst = []
 
     recept1 = Recept("Recept 1","Dit is een omschrijving van gerecht 1")
-    stappen1 = [Stap('Stap 1'), Stap('Stap 2')]
+    stappen1 = [Stap('Stap 1'), Stap('Stap 2', 'Tip 1')]
     ingredient1_1 = Ingredient("graan", 150.5, "gram", 75)
     ingredient1_1.setPlantaardigAlternatief(Ingredient("havergraan", 50, "gram", 25))
     ingredient1_2 = Ingredient("melk", 1, "liter", 120.5)
