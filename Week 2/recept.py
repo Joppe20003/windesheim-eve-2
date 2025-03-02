@@ -19,34 +19,45 @@ class Recept:
         return self.__omschrijving
     
     def setAantalPersonen(self, aantal):
+        oudeAantal = self.__aantalPersonen
+
         self.__aantalPersonen = aantal
 
+        nieuweAantal = self.__aantalPersonen
+
         for ingredient in self.__ingredientenLijst:
-            ingredient.setHoeveelheid(aantal)
+            oudeHoeveelheid = ingredient.getHoeveelheid()
+
+            ingredient.setHoeveelheid(oudeHoeveelheid / oudeAantal * nieuweAantal)
+
+        self.__aantalPersonen = aantal
 
     def getAantalPersonen(self):
         return self.__aantalPersonen
     
     def setPlantAardigRecept(self, plantaardig):
-        plantAardigIngredientenLijst = []
-        nietPlantAardigIngredientenLijst = []
+        nieuweLijst = []
 
         for ingredient in self.__ingredientenLijst:
             if plantaardig:
                 alternatief = ingredient.getIngredient(True)
-                alternatief.setHoeveelheid(self.__aantalPersonen)
-
-                plantAardigIngredientenLijst.append(alternatief)
+                
+                if alternatief is not None:
+                    alternatief.setHoeveelheid(alternatief.getHoeveelheid() * self.__aantalPersonen)
+                    nieuweLijst.append(alternatief)
+                    
             else:
-                nietPlantAardigIngredientenLijst.append(ingredient.getIngredient(False))
+                alternatief = ingredient.getIngredient(False)
+                nieuweLijst.append(alternatief)
 
-        if plantaardig:
-            return plantAardigIngredientenLijst
-        return nietPlantAardigIngredientenLijst
+        self.__ingredientenLijst = nieuweLijst
+                    
 
     def __str__(self):
         stappen = "\n".join(f"{index + 1}. {stap}" for index, stap in enumerate(self.__stappenLijst))
+        ingredienten = "\n".join(f"{ingredient}" for ingredient in self.__ingredientenLijst)
         
         return (f"Naam: {self.__naam}\n"
                 f"Beschrijving: {self.__omschrijving}\n"
-                f"Stappen:\n{stappen}")
+                f"Stappen:\n{stappen}\n"
+                f"Ingredienten:\n{ingredienten}")

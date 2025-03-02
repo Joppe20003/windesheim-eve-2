@@ -7,8 +7,8 @@ class Ingredient:
         self.__plantaardigAlternatief = None
 
     def setHoeveelheid(self, hoeveelheid):
-        self.__hoeveelheid = self.getHoeveelheid() * hoeveelheid
-        self.__kcal = self.getKcal() * hoeveelheid
+        self.__hoeveelheid =  hoeveelheid
+        self.__kcal = hoeveelheid
 
     def getHoeveelheid(self):
         return self.__hoeveelheid

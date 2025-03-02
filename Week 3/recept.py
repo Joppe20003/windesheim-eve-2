@@ -40,19 +40,16 @@ class Recept:
 
         for ingredient in self.__ingredientenLijst:
             if plantaardig:
-                # Controleer of er een plantaardig alternatief is
                 alternatief = ingredient.getIngredient(True)
                 
                 if alternatief is not None:
-                    # Pas de hoeveelheid van het plantaardige alternatief aan op basis van aantal personen
                     alternatief.setHoeveelheid(alternatief.getHoeveelheid() * self.__aantalPersonen)
                     nieuweLijst.append(alternatief)
+                    
             else:
-                # Voeg het originele ingrediënt toe als plantaardig niet gewenst is
                 alternatief = ingredient.getIngredient(False)
                 nieuweLijst.append(alternatief)
 
-        # Werk de ingredientenlijst bij met de nieuwe lijst van ingrediënten
         self.__ingredientenLijst = nieuweLijst
                     
 
